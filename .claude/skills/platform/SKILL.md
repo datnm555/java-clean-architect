@@ -9,7 +9,7 @@ description: Whole-system map for java-clean-architect — the Maven modules, th
 
 # java-clean-architect Platform Skill — bird's-eye view
 
-A from-scratch Clean Architecture + DDD + CQRS + Vertical Slice template for Java 21 /
+A from-scratch Clean Architecture + DDD + Vertical Slice (CQRS-lite) template for Java 21 /
 Spring Boot 3.5.x, built as a Maven multi-module project (`com.example`), PostgreSQL via
 Spring Data JPA. It is the Java mirror of the .NET `clean-architect-template`: only the
 architectural skeleton plus one example vertical slice (`examples`), with cross-cutting
@@ -21,7 +21,7 @@ patterns deferred until a real problem earns them.
 |---|---|---|
 | `shared-kernel/` | Framework-free primitives: Result, Error, Entity, AggregateRoot, ValueObject, DomainEvent | `shared-kernel` |
 | `domain/` | Aggregates, business rules, domain errors, domain events | `domain` |
-| `application/` | CQRS command/query handlers, ports (interfaces), validation | `application` |
+| `application/` | Use cases (one class per use case), command/query records, ports | `application` |
 | `infrastructure/` | JPA adapters, Spring Data repositories, Flyway migrations, event dispatch | `infrastructure` |
 | `api/` | Spring Boot app: REST controllers, Result→HTTP mapping, config, test suites | `api` |
 
@@ -45,6 +45,7 @@ Enforced twice:
 | Framework | Spring Boot 3.5.x |
 | Build | Maven multi-module, wrapper committed (`./mvnw`), versions managed in the parent pom |
 | Database | PostgreSQL, Spring Data JPA, Flyway migrations |
+| Application style | Use-case-per-class (CQRS-lite: command/query records, NO mediator/decorators — cross-cutting via native Spring: `@Valid`, `@Transactional`, AOP) |
 | Result/error model | Result pattern (shared-kernel); RFC 7807 ProblemDetail at the HTTP edge |
 | Domain events | Raised on aggregates, dispatched AFTER COMMIT (`@TransactionalEventListener`) |
 | Tests | JUnit 5, AssertJ, Mockito; ArchUnit; Testcontainers PostgreSQL |
@@ -56,7 +57,7 @@ Feature packages are **plural** (`examples`), the aggregate inside is **singular
 
 ```
 domain/…/examples/          Aggregate + errors + domain events
-application/…/examples/     Commands/queries + handlers + ports
+application/…/examples/     Command/query records + use cases + ports
 infrastructure/…/examples/  JPA repository adapter + persistence config + migration
 api/…/examples/             REST controller + request/response records
 ```
@@ -64,7 +65,7 @@ api/…/examples/             REST controller + request/response records
 ## Skill navigation guide
 
 - Business rules / aggregates / invariants → `domain`
-- Use cases / handlers / ports / validation → `application`
+- Use cases / commands / queries / ports → `application`
 - Persistence / migrations / event dispatch → `infrastructure`
 - HTTP / controllers / error mapping / config / running the app → `api`
 - Result, Error, base types → `shared-kernel`

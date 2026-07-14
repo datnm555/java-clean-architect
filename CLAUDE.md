@@ -1,6 +1,6 @@
 # java-clean-architect — Claude Code Instructions
 
-Clean Architecture + DDD + CQRS + Vertical Slice template for **Java 21 / Spring Boot 3.5**,
+Clean Architecture + DDD + Vertical Slice (CQRS-lite) template for **Java 21 / Spring Boot 3.5**,
 Maven multi-module (`com.example`), PostgreSQL. Java mirror of the .NET
 `clean-architect-template`. Deliberately thin: architectural skeleton + one example slice;
 cross-cutting patterns (outbox, caching, auth, telemetry) are added only when a real
