@@ -8,7 +8,7 @@ description: Use this skill when working in domain/ — aggregates, business rul
 # domain Skill
 
 The business core: aggregates enforce invariants and raise domain events. One package per
-feature, plural (`com.example.domain.examples`), aggregate singular (`Example`).
+feature, plural (`com.example.domain.products`), aggregate singular (`Product`).
 
 ## Overview
 | Property | Value |
@@ -19,11 +19,11 @@ feature, plural (`com.example.domain.examples`), aggregate singular (`Example`).
 | Allowed extra API | `jakarta.persistence` annotations ONLY (documented trade-off below) |
 
 ## Architecture & Patterns
-- Aggregates extend `AggregateRoot`; factory methods (`Example.create(...)`) and state
+- Aggregates extend `AggregateRoot`; factory methods (`Product.create(...)`) and state
   changes return `Result`/`Result<T>` instead of throwing.
 - Each feature package holds: the aggregate, `<Aggregate>Errors` (static Error catalog,
-  e.g. `ExampleErrors.notFound(id)`), and `<Something>DomainEvent` records.
-- Events are raised inside the aggregate (`raise(new ExampleCreatedDomainEvent(...))`)
+  e.g. `ProductErrors.notFound(id)`), and `<Something>DomainEvent` records.
+- Events are raised inside the aggregate (`raise(new ProductCreatedDomainEvent(...))`)
   and dispatched after commit by infrastructure — never dispatched from here.
 
 ## Key Rules & Gotchas
