@@ -18,8 +18,9 @@ module before writing code in it.
    - `<Aggregate>Errors.java` — static Error catalog
    - `<Aggregate>CreatedDomainEvent.java` (+ further events as behavior demands)
 2. **application** — `com.example.application.<feature>/`
-   - `Create<Aggregate>Command.java` + `Create<Aggregate>CommandHandler.java`
-   - `Get<Aggregate>Query.java` + `Get<Aggregate>QueryHandler.java` + response record
+   - `Create<Aggregate>Command.java` (record, Bean Validation annotations)
+     + `Create<Aggregate>UseCase.java` (`@Service`, `@Transactional`, single `handle`)
+   - `Get<Aggregate>Query.java` + `Get<Aggregate>UseCase.java` + response record
    - `<Aggregate>Repository.java` (port)
 3. **infrastructure** — `com.example.infrastructure.<feature>/`
    - `Jpa<Aggregate>Repository.java` (adapter) + package-private Spring Data interface
@@ -27,12 +28,12 @@ module before writing code in it.
 4. **api** — `com.example.api.<feature>/`
    - `<Feature>Controller.java` + request records
 5. **tests**
-   - Aggregate unit tests (domain), handler unit tests (application, Mockito ports),
+   - Aggregate unit tests (domain), use-case unit tests (application, Mockito ports),
      endpoint integration test (api, Testcontainers)
 
 ## Checklist
 
-- [ ] Handlers follow naming rules — ArchUnit will fail otherwise
+- [ ] Use cases follow naming rules (`*UseCase`, single public `handle`) — ArchUnit will fail otherwise
 - [ ] All business failures via `Result` + `<Aggregate>Errors` — no exceptions
 - [ ] Migration added; `ddl-auto` stays `validate`
 - [ ] `./mvnw verify` green locally

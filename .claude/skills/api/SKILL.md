@@ -29,8 +29,9 @@ configuration, and the whole-app test suites.
 ```
 
 ## Architecture & Patterns
-- Controllers are thin: bind request → build command/query → call handler → map the
-  `Result` to HTTP. Failures become RFC 7807 `ProblemDetail` with status from
+- Controllers are thin: bind request (`@Valid`) → build command/query → call the
+  injected use case → map the `Result` to HTTP. Failures become RFC 7807
+  `ProblemDetail` with status from
   `ErrorType`: VALIDATION→400, PROBLEM→400, NOT_FOUND→404, CONFLICT→409, FAILURE→500.
 - `GlobalExceptionHandler` (`@RestControllerAdvice`) catches the unexpected → 500
   ProblemDetail. Business failures never travel as exceptions.
@@ -49,4 +50,4 @@ configuration, and the whole-app test suites.
   for the Testcontainers suite.
 
 ## Related Skills
-- Maps errors defined in `shared-kernel`; calls handlers from `application`.
+- Maps errors defined in `shared-kernel`; calls use cases from `application`.
