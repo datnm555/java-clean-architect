@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: java-clean-architect
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cleanarch
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: validate # schema changes ONLY via Flyway migrations
+    open-in-view: false
+  flyway:
+    enabled: true
+
+server:
+  port: 8080

@@ -7,7 +7,7 @@ argument-hint: <feature-plural> <Aggregate> (e.g. "orders Order")
 
 Target: $ARGUMENTS
 
-Feature packages are **plural**, the aggregate **singular**. Use the `examples`/`Example`
+Feature packages are **plural**, the aggregate **singular**. Use the `products`/`Product`
 slice as the living reference — copy its shape, not its code. Load the skill of each
 module before writing code in it.
 

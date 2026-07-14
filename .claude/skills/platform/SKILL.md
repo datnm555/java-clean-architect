@@ -12,7 +12,7 @@ description: Whole-system map for java-clean-architect — the Maven modules, th
 A from-scratch Clean Architecture + DDD + Vertical Slice (CQRS-lite) template for Java 21 /
 Spring Boot 3.5.x, built as a Maven multi-module project (`com.example`), PostgreSQL via
 Spring Data JPA. It is the Java mirror of the .NET `clean-architect-template`: only the
-architectural skeleton plus one example vertical slice (`examples`), with cross-cutting
+architectural skeleton plus reference vertical slices (`products`, `orders`), with cross-cutting
 patterns deferred until a real problem earns them.
 
 ## Modules & owning skills
@@ -52,14 +52,14 @@ Enforced twice:
 
 ## Anatomy of a vertical slice
 
-Feature packages are **plural** (`examples`), the aggregate inside is **singular**
-(`Example`). One slice spans four modules — `/new-slice` has the full recipe:
+Feature packages are **plural** (`products`), the aggregate inside is **singular**
+(`Product`). One slice spans four modules — `/new-slice` has the full recipe:
 
 ```
-domain/…/examples/          Aggregate + errors + domain events
-application/…/examples/     Command/query records + use cases + ports
-infrastructure/…/examples/  JPA repository adapter + persistence config + migration
-api/…/examples/             REST controller + request/response records
+domain/…/products/          Aggregate + errors + domain events
+application/…/products/     Command/query records + use cases + ports
+infrastructure/…/products/  JPA repository adapter + persistence config + migration
+api/…/products/             REST controller + request/response records
 ```
 
 ## Skill navigation guide
