@@ -1,0 +1,12 @@
+**/target/
+.git/
+.idea/
+.vscode/
+.claude/
+agent_docs/
+claude-starter-kit/
+docs/
+*.md
+.DS_Store
+compose.yml
+Dockerfile
