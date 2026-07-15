@@ -35,6 +35,8 @@ configuration, and the whole-app test suites.
   `ErrorType`: VALIDATION→400, PROBLEM→400, NOT_FOUND→404, CONFLICT→409, FAILURE→500.
 - `GlobalExceptionHandler` (`@RestControllerAdvice`) catches the unexpected → 500
   ProblemDetail. Business failures never travel as exceptions.
+- API docs via springdoc: Swagger UI at `/swagger-ui.html`, spec at `/v3/api-docs`
+  (metadata in `openapi/OpenApiConfiguration`).
 - ArchUnit tests in this module guard layer + naming rules for ALL modules.
 - Integration tests: Testcontainers PostgreSQL + the real Spring context, hitting real
   HTTP endpoints.
