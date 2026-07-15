@@ -37,6 +37,8 @@ configuration, and the whole-app test suites.
   ProblemDetail. Business failures never travel as exceptions.
 - API docs via springdoc: Swagger UI at `/swagger-ui.html`, spec at `/v3/api-docs`
   (metadata in `openapi/OpenApiConfiguration`).
+- Actuator exposes `health` + `info` only (probes enabled for k8s liveness/readiness);
+  expose more endpoints only when something consumes them.
 - ArchUnit tests in this module guard layer + naming rules for ALL modules.
 - Integration tests: Testcontainers PostgreSQL + the real Spring context, hitting real
   HTTP endpoints.
