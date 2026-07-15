@@ -6,7 +6,7 @@ services:
       POSTGRES_DB: cleanarch
       POSTGRES_PASSWORD: postgres
     ports:
-      - "5432:5432"
+      - "${DB_PORT:-5432}:5432" # override when 5432 is taken: DB_PORT=5544 docker compose up
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -d cleanarch"]
       interval: 5s
@@ -16,7 +16,7 @@ services:
   app:
     build: .
     ports:
-      - "8080:8080"
+      - "${APP_PORT:-8080}:8080" # override when 8080 is taken: APP_PORT=8099 docker compose up
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/cleanarch
     depends_on:
